@@ -41,6 +41,7 @@ struct ActionResult {
 class Bot {
 	public:
 		virtual ~Bot() = 0;
+		virtual const char* winPhrase() const = 0;
 		virtual void start(int nplayers, Card hidden[], Card hand[]) = 0;
 		virtual const char* name() const = 0;
 		virtual Action move() = 0;
