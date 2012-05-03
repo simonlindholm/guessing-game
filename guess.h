@@ -41,15 +41,11 @@ struct ActionResult {
 class Bot {
 	public:
 		virtual ~Bot() = 0;
+		virtual void start(int nplayers, Card hidden[], Card hand[]) = 0;
 		virtual const char* name() const = 0;
 		virtual Action move() = 0;
 		virtual int placedCard(int byPlayer, Card card) = 0;
 		virtual void madeMove(int player, const ActionResult& move) = 0;
 };
-
-template<class B>
-Bot* makeBot(int n, Card hidden[], Card hand[]) {
-	return new B(n, hidden, hand);
-}
 
 }
