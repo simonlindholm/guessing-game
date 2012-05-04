@@ -11,6 +11,19 @@ int GuessAPI::random(int to) {
 	return static_cast<int>(rand() / (RAND_MAX + 1.0) * to);
 }
 
+void clearStack() {
+	char* m = (char*)alloca(1000);
+	for (int i = 0; i < 1000; ++i)
+		m[i] = 0;
+}
+
+#define trampoline(bot, func, args) \
+	{ \
+		char buf[random(400)*8]; \
+		clearStack(); \
+		bot->func args ; \
+	}
+
 int main(int argc, char** argv) {
 	if (argc < 3) {
 		cout << "Need some bots as arguments.";
@@ -37,7 +50,7 @@ int main(int argc, char** argv) {
 		Bot* b = bots[i];
 		Card* hidden = new Card[3];
 		Card* hand = new Card[3];
-		b->start(nplayers, hidden, hand);
+		trampoline(b, start, (nplayers, hidden, hand));
 		delete[] hidden;
 		delete[] hand;
 	}
