@@ -7,6 +7,10 @@
 using namespace std;
 using namespace GuessAPI;
 
+int GuessAPI::random(int to) {
+	return static_cast<int>(rand() / (RAND_MAX + 1.0) * to);
+}
+
 int main(int argc, char** argv) {
 	if (argc < 3) {
 		cout << "Need some bots as arguments.";
@@ -27,6 +31,7 @@ int main(int argc, char** argv) {
 			deck.push_back(c);
 		}
 	}
+	random_shuffle(deck.begin(), deck.end(), GuessAPI::random);
 
 	for (int i = 0; i < nplayers; ++i) {
 		Bot* b = bots[i];

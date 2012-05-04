@@ -50,4 +50,6 @@ class Bot {
 		virtual void madeMove(int player, const ActionResult& move) = 0;
 };
 
+int random(int to);
+
 }
