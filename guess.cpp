@@ -1,3 +1,8 @@
+#if 0
+g++ "$0" -std=c++0x "$@"
+exit
+#endif
+
 #include <iostream>
 #include <memory>
 #include <algorithm>
