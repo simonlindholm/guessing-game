@@ -12,17 +12,20 @@ int GuessAPI::random(int to) {
 }
 
 void clearStack() {
-	char* m = (char*)alloca(1000);
-	for (int i = 0; i < 1000; ++i)
-		m[i] = 0;
+	int sz = 400*8 + 1000;
+	char* m = (char*)alloca(sz);
+	for (int i = 0; i < sz; ++i)
+		m[i] = rand()%256;
 }
 
 #define trampoline(retexpr, bot, func, args) \
-	{ \
-		char buf[random(400)*8]; \
+	do { \
 		clearStack(); \
-		retexpr bot->func args ; \
-	}
+		{ \
+			volatile char buf[random(400)*8]; \
+			retexpr bot->func args ; \
+		} \
+	} while(0)
 
 int main(int argc, char** argv) {
 	int nplayers = argc-1;
